@@ -1,0 +1,3353 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-homebridge-platform-wemo/node_modules/homebridge-platform-wemo/index.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-homebridge-platform-wemo">npmtest-homebridge-platform-wemo (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-homebridge-platform-wemo/node_modules/homebridge-platform-wemo/index.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">8.1% <small>(44 / 543)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 301)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 75)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">8.18% <small>(44 / 538)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-homebridge-platform-wemo/node_modules/homebridge-platform-wemo/</a> &#187; index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+1011
+1012
+1013
+1014
+1015
+1016
+1017
+1018
+1019
+1020
+1021
+1022
+1023
+1024
+1025
+1026
+1027
+1028
+1029
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+1041
+1042
+1043
+1044</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* jshint node: true */
+// Wemo Platform Plugin for HomeBridge (https://github.com/nfarina/homebridge)
+//
+// Remember to add platform to config.json. Example:
+// "platforms": [
+//      {
+//          "platform": "BelkinWeMo",
+//          "name": "Belkin WeMo",
+//          "noMotionTimer": 60 // optional: [WeMo Motion only] a timer (in seconds) which is started no motion is detected, defaults to 60
+//      }
+// ],
+&nbsp;
+"use strict";
+&nbsp;
+const DEFAULT_DOOR_OPEN_TIME = 20,
+      DEFAULT_NO_MOTION_TIME = 60;
+&nbsp;
+var Wemo  = require('wemo-client'),
+    debug = require('debug')('homebridge-platform-wemo');
+&nbsp;
+var Accessory, Characteristic, Consumption, Service, TotalConsumption, UUIDGen;
+var wemo = new Wemo();
+&nbsp;
+var doorOpenTimer, noMotionTimer;
+&nbsp;
+module.exports = <span class="fstat-no" title="function not covered" >function (homebridge) {</span>
+<span class="cstat-no" title="statement not covered" >    Accessory = homebridge.platformAccessory;</span>
+<span class="cstat-no" title="statement not covered" >    Characteristic = homebridge.hap.Characteristic;</span>
+<span class="cstat-no" title="statement not covered" >    Service = homebridge.hap.Service;</span>
+<span class="cstat-no" title="statement not covered" >    UUIDGen = homebridge.hap.uuid;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    Consumption = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        Characteristic.call(this, 'Consumption', 'E863F10D-079E-48FF-8F27-9C2605A29F52');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.setProps({</span>
+            format: Characteristic.Formats.UINT16,
+            unit: 'W',
+            perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.value = this.getDefaultValue();</span>
+    };
+<span class="cstat-no" title="statement not covered" >    require('util').inherits(Consumption, Characteristic);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    Consumption.UUID = 'E863F10D-079E-48FF-8F27-9C2605A29F52';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    TotalConsumption = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        Characteristic.call(this, 'Total Consumption', 'E863F10C-079E-48FF-8F27-9C2605A29F52');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.setProps({</span>
+            format: Characteristic.Formats.UINT32,
+            unit: 'kWh',
+            perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.value = this.getDefaultValue();</span>
+    };
+<span class="cstat-no" title="statement not covered" >    require('util').inherits(TotalConsumption, Characteristic);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    TotalConsumption.UUID = 'E863F10C-079E-48FF-8F27-9C2605A29F52';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    homebridge.registerPlatform("homebridge-platform-wemo", "BelkinWeMo", WemoPlatform, true);</span>
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function WemoPlatform(log, config, api) {</span>
+<span class="cstat-no" title="statement not covered" >    this.config = config || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.config.ignoredDevices &amp;&amp; this.config.ignoredDevices.constructor !== Array) {</span>
+<span class="cstat-no" title="statement not covered" >        delete this.config.ignoredDevices;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.ignoredDevices = this.config.ignoredDevices || [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.api = api;</span>
+<span class="cstat-no" title="statement not covered" >    this.accessories = {};</span>
+<span class="cstat-no" title="statement not covered" >    this.log = log;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    doorOpenTimer = this.config.doorOpenTimer || DEFAULT_DOOR_OPEN_TIME;</span>
+<span class="cstat-no" title="statement not covered" >    noMotionTimer = this.config.noMotionTimer || this.config.no_motion_timer || DEFAULT_NO_MOTION_TIME;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var addDiscoveredDevice = <span class="fstat-no" title="function not covered" >function(device) {</span></span>
+<span class="cstat-no" title="statement not covered" >        var uuid = UUIDGen.generate(device.UDN);</span>
+<span class="cstat-no" title="statement not covered" >        var accessory;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (device.deviceType === Wemo.DEVICE_TYPE.Bridge) {</span>
+<span class="cstat-no" title="statement not covered" >            var client = this.client(device , self.log);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            client.getEndDevices(<span class="fstat-no" title="function not covered" >function (err, enddevices) {</span></span>
+<span class="cstat-no" title="statement not covered" >                for (var i = 0, tot = enddevices.length; i &lt; tot; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                    uuid = UUIDGen.generate(enddevices[i].deviceId);</span>
+<span class="cstat-no" title="statement not covered" >                    accessory = self.accessories[uuid];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    if (self.ignoredDevices.indexOf(device.serialNumber) !== -1) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (accessory !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                            self.removeAccessory(accessory);</span>
+                        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        return;</span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    if (accessory === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                        self.addLinkAccessory(device, enddevices[i]);</span>
+                    }
+                    else {
+<span class="cstat-no" title="statement not covered" >                        self.accessories[uuid] = new WemoLinkAccessory(self.log, accessory, device, enddevices[i]);</span>
+                    }
+                }
+            });
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >            accessory = self.accessories[uuid];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (self.ignoredDevices.indexOf(device.serialNumber) !== -1) {</span>
+<span class="cstat-no" title="statement not covered" >                if (accessory !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                    self.removeAccessory(accessory);</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (accessory === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                self.addAccessory(device);</span>
+            }
+            else <span class="cstat-no" title="statement not covered" >if (accessory instanceof WemoAccessory) {</span>
+<span class="cstat-no" title="statement not covered" >                self.log("Online and can update device: %s [%s]", accessory.displayName, device.macAddress);</span>
+<span class="cstat-no" title="statement not covered" >                accessory.setupDevice(device);</span>
+<span class="cstat-no" title="statement not covered" >                accessory.observeDevice(device);</span>
+            }
+            else {
+<span class="cstat-no" title="statement not covered" >                self.log("Online: %s [%s]", accessory.displayName, device.macAddress);</span>
+<span class="cstat-no" title="statement not covered" >               self.accessories[uuid] = new WemoAccessory(self.log, accessory, device);</span>
+            }
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.api.on('didFinishLaunching', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        wemo.discover(addDiscoveredDevice);</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    setInterval(</span>
+<span class="fstat-no" title="function not covered" >        function(){</span>
+<span class="cstat-no" title="statement not covered" >            wemo.discover(addDiscoveredDevice);</span>
+        },
+        30000
+    );
+}
+&nbsp;
+WemoPlatform.prototype.addAccessory = <span class="fstat-no" title="function not covered" >function(device) {</span>
+<span class="cstat-no" title="statement not covered" >    var serviceType;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    switch(device.deviceType) {</span>
+        case Wemo.DEVICE_TYPE.Insight:
+        case Wemo.DEVICE_TYPE.Switch:
+<span class="cstat-no" title="statement not covered" >            serviceType = Service.Outlet;</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case Wemo.DEVICE_TYPE.LightSwitch:
+<span class="cstat-no" title="statement not covered" >            serviceType = Service.Switch;</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case Wemo.DEVICE_TYPE.Motion:
+        case "urn:Belkin:device:NetCamSensor:1":
+<span class="cstat-no" title="statement not covered" >            serviceType = Service.MotionSensor;</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case Wemo.DEVICE_TYPE.Maker:
+<span class="cstat-no" title="statement not covered" >            serviceType = Service.Switch;</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        default:
+<span class="cstat-no" title="statement not covered" >            this.log("Not Supported: %s [%s]", device.friendlyName, device.deviceType);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (serviceType === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.log("Found: %s [%s]", device.friendlyName, device.macAddress);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var accessory = new Accessory(device.friendlyName, UUIDGen.generate(device.UDN));</span>
+<span class="cstat-no" title="statement not covered" >    var service = accessory.addService(serviceType, device.friendlyName);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    switch(device.deviceType) {</span>
+        case Wemo.DEVICE_TYPE.Insight:
+            //service.addCharacteristic(Characteristic.OutletInUse);
+<span class="cstat-no" title="statement not covered" >            service.addCharacteristic(Consumption);</span>
+<span class="cstat-no" title="statement not covered" >            service.addCharacteristic(TotalConsumption);</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.accessories[accessory.UUID] = new WemoAccessory(this.log, accessory, device);</span>
+<span class="cstat-no" title="statement not covered" >    this.api.registerPlatformAccessories("homebridge-platform-wemo", "BelkinWeMo", [accessory]);</span>
+}
+&nbsp;
+WemoPlatform.prototype.addLinkAccessory = <span class="fstat-no" title="function not covered" >function(link, device) {</span>
+<span class="cstat-no" title="statement not covered" >    this.log("Found: %s [%s]", device.friendlyName, device.deviceId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var accessory = new Accessory(device.friendlyName, UUIDGen.generate(device.deviceId));</span>
+<span class="cstat-no" title="statement not covered" >    accessory.addService(Service.Lightbulb, device.friendlyName).addCharacteristic(Characteristic.Brightness);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.accessories[accessory.UUID] = new WemoLinkAccessory(this.log, accessory, link, device);</span>
+<span class="cstat-no" title="statement not covered" >    this.api.registerPlatformAccessories("homebridge-platform-wemo", "BelkinWeMo", [accessory]);</span>
+}
+&nbsp;
+WemoPlatform.prototype.configureAccessory = <span class="fstat-no" title="function not covered" >function(accessory) {</span>
+<span class="cstat-no" title="statement not covered" >    accessory.updateReachability(false);</span>
+<span class="cstat-no" title="statement not covered" >    this.accessories[accessory.UUID] = accessory;</span>
+}
+&nbsp;
+WemoPlatform.prototype.configurationRequestHandler = <span class="fstat-no" title="function not covered" >function(context, request, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+<span class="cstat-no" title="statement not covered" >    var respDict = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (request &amp;&amp; request.type === "Terminate") {</span>
+<span class="cstat-no" title="statement not covered" >        context.onScreen = null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var sortAccessories = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        context.sortedAccessories = Object.keys(self.accessories).map(</span>
+<span class="fstat-no" title="function not covered" >            function(k){<span class="cstat-no" title="statement not covered" ></span>return this[k] instanceof Accessory ? this[k] : this[k].accessory}</span>,
+            self.accessories
+        ).sort(<span class="fstat-no" title="function not covered" >function(a,b) {<span class="cstat-no" title="statement not covered" ></span>if (a.displayName &lt; b.displayName) <span class="cstat-no" title="statement not covered" >return -1; <span class="cstat-no" title="statement not covered" ></span></span>if (a.displayName &gt; b.displayName) <span class="cstat-no" title="statement not covered" >return 1; <span class="cstat-no" title="statement not covered" ></span></span>return 0}</span>);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return Object.keys(context.sortedAccessories).map(<span class="fstat-no" title="function not covered" >function(k) {<span class="cstat-no" title="statement not covered" ></span>return this[k].displayName}</span>, context.sortedAccessories);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    switch(context.onScreen) {</span>
+        case "DoRemove":
+<span class="cstat-no" title="statement not covered" >            if (request.response.selections) {</span>
+<span class="cstat-no" title="statement not covered" >                for (var i in request.response.selections.sort()) {</span>
+<span class="cstat-no" title="statement not covered" >                    this.removeAccessory(context.sortedAccessories[request.response.selections[i]]);</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                respDict = {</span>
+                    "type": "Interface",
+                    "interface": "instruction",
+                    "title": "Finished",
+                    "detail": "Accessory removal was successful."
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                context.onScreen = null;</span>
+<span class="cstat-no" title="statement not covered" >                callback(respDict);</span>
+            }
+            else {
+<span class="cstat-no" title="statement not covered" >                context.onScreen = null;</span>
+<span class="cstat-no" title="statement not covered" >                callback(respDict, "platform", true, this.config);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case "Menu":
+<span class="cstat-no" title="statement not covered" >            context.onScreen = "Remove";</span>
+        case "Remove":
+<span class="cstat-no" title="statement not covered" >            respDict = {</span>
+                "type": "Interface",
+                "interface": "list",
+                "title": "Select accessory to " + context.onScreen.toLowerCase(),
+                "allowMultipleSelection": context.onScreen == "Remove",
+                "items": sortAccessories()
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            context.onScreen = "Do" + context.onScreen;</span>
+<span class="cstat-no" title="statement not covered" >            callback(respDict);</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        default:
+<span class="cstat-no" title="statement not covered" >            if (request &amp;&amp; (request.response || request.type === "Terminate")) {</span>
+<span class="cstat-no" title="statement not covered" >                context.onScreen = null;</span>
+<span class="cstat-no" title="statement not covered" >                callback(respDict, "platform", true, this.config);</span>
+            }
+            else {
+<span class="cstat-no" title="statement not covered" >                respDict = {</span>
+                    "type": "Interface",
+                    "interface": "list",
+                    "title": "Select option",
+                    "allowMultipleSelection": false,
+                    "items": ["Remove Accessory"]
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                context.onScreen = "Menu";</span>
+<span class="cstat-no" title="statement not covered" >                callback(respDict);</span>
+            }
+    }
+}
+&nbsp;
+WemoPlatform.prototype.removeAccessory = <span class="fstat-no" title="function not covered" >function(accessory) {</span>
+<span class="cstat-no" title="statement not covered" >    this.log("Remove Accessory: %s", accessory.displayName);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.accessories[accessory.UUID]) {</span>
+<span class="cstat-no" title="statement not covered" >        delete this.accessories[accessory.UUID];</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.api.unregisterPlatformAccessories("homebridge-platform-wemo", "BelkinWeMo", [accessory]);</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function WemoAccessory(log, accessory, device) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.accessory = accessory;</span>
+<span class="cstat-no" title="statement not covered" >    this.device = device;</span>
+<span class="cstat-no" title="statement not covered" >    this.log = log;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.setupDevice(device);</span>
+<span class="cstat-no" title="statement not covered" >    this.updateReachability(true);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.accessory.getService(Service.AccessoryInformation)</span>
+        .setCharacteristic(Characteristic.Manufacturer, "Belkin WeMo")
+        .setCharacteristic(Characteristic.Model, device.modelName)
+        .setCharacteristic(Characteristic.SerialNumber, device.serialNumber)
+        .setCharacteristic(Characteristic.FirmwareRevision, device.firmwareVersion);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.accessory.on('identify', <span class="fstat-no" title="function not covered" >function(paired, callback) {</span></span>
+<span class="cstat-no" title="statement not covered" >        self.log("%s - identify", self.accessory.displayName);</span>
+<span class="cstat-no" title="statement not covered" >        callback();</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.observeDevice(device);</span>
+<span class="cstat-no" title="statement not covered" >    this.addEventHandlers();</span>
+}
+&nbsp;
+&nbsp;
+WemoAccessory.prototype.addEventHandler = <span class="fstat-no" title="function not covered" >function(serviceName, characteristic) {</span>
+<span class="cstat-no" title="statement not covered" >    serviceName = serviceName || Service.Switch;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var service = this.accessory.getService(serviceName);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (service === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        serviceName = Service.Outlet;</span>
+<span class="cstat-no" title="statement not covered" >        service = this.accessory.getService(serviceName);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (service === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (service.testCharacteristic(characteristic) === false) {</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    switch(characteristic) {</span>
+        case Characteristic.On:
+<span class="cstat-no" title="statement not covered" >            service</span>
+                .getCharacteristic(characteristic)
+                .on('set', this.setSwitchState.bind(this));
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case Characteristic.TargetDoorState:
+<span class="cstat-no" title="statement not covered" >            service</span>
+                .getCharacteristic(characteristic)
+                .on('set', this.setTargetDoorState.bind(this));
+    }
+}
+&nbsp;
+WemoAccessory.prototype.addEventHandlers = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >    this.addEventHandler(Service.Switch, Characteristic.On);</span>
+<span class="cstat-no" title="statement not covered" >    this.addEventHandler(Service.GarageDoorOpener, Characteristic.TargetDoorState);</span>
+}
+&nbsp;
+WemoAccessory.prototype.getAttributes = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    callback = callback || <span class="fstat-no" title="function not covered" >function() {</span>};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.client.getAttributes(<span class="fstat-no" title="function not covered" >function(err, attributes) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (err) {</span>
+<span class="cstat-no" title="statement not covered" >            this.log(err);</span>
+<span class="cstat-no" title="statement not covered" >            callback();</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.device.attributes = attributes;</span>
+&nbsp;
+        // SwitchMode - Momentary
+<span class="cstat-no" title="statement not covered" >        if (attributes.SwitchMode == 1) {</span>
+<span class="cstat-no" title="statement not covered" >            if (this.accessory.getService(Service.GarageDoorOpener) === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                this.accessory.addService(Service.GarageDoorOpener, this.accessory.displayName);</span>
+<span class="cstat-no" title="statement not covered" >                this.addEventHandler(Service.GarageDoorOpener, Characteristic.TargetDoorState);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (this.accessory.getService(Service.Switch) !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                this.accessory.removeService(this.accessory.getService(Service.Switch));</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (this.accessory.getService(Service.ContactSensor) !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                this.accessory.removeService(this.accessory.getService(Service.ContactSensor));</span>
+            }
+        }
+        // SwitchMode - Toggle
+        else <span class="cstat-no" title="statement not covered" >if (attributes.SwitchMode == 0) {</span>
+<span class="cstat-no" title="statement not covered" >            if (this.accessory.getService(Service.Switch) === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                this.accessory.addService(Service.Switch, this.accessory.displayName);</span>
+<span class="cstat-no" title="statement not covered" >                this.addEventHandler(Service.Switch, Characteristic.On);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (this.accessory.getService(Service.GarageDoorOpener) !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                this.accessory.removeService(this.accessory.getService(Service.GarageDoorOpener));</span>
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (attributes.SensorPresent == 1) {</span>
+<span class="cstat-no" title="statement not covered" >            if (this.accessory.getService(Service.Switch) !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                 if (this.accessory.getService(Service.ContactSensor) === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                     this.log("%s - Add Service: %s", this.accessory.displayName, "Service.ContactSensor");</span>
+<span class="cstat-no" title="statement not covered" >                     this.accessory.addService(Service.ContactSensor, this.accessory.displayName);</span>
+                 }
+            }
+            else <span class="cstat-no" title="statement not covered" >if (this.accessory.getService(Service.GarageDoorOpener) !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                this.sensorPresent = true;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.updateSensorState(attributes.Sensor);</span>
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >            var contactSensor = this.accessory.getService(Service.ContactSensor);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (contactSensor !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                this.log("%s - Remove Service: %s", this.accessory.displayName, "Service.ContactSensor");</span>
+<span class="cstat-no" title="statement not covered" >                this.accessory.removeService(contactSensor);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            delete this.sensorPresent;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (this.accessory.getService(Service.Switch) !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >            this.updateSwitchState(attributes.Switch);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        callback();</span>
+    }.bind(this));
+}
+&nbsp;
+WemoAccessory.prototype.getSwitchState = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    if (this.device.deviceType === Wemo.DEVICE_TYPE.Maker) {</span>
+<span class="cstat-no" title="statement not covered" >        this.getAttributes(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >            callback(null, this.accessory.getService(Service.Switch).getCharacteristic(Characteristic.On).value);</span>
+        }.bind(this));
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >        this.client.getBinaryState(<span class="fstat-no" title="function not covered" >function(err, state) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                var service = this.accessory.getService(Service.Switch) || this.accessory.getService(Service.Outlet);</span>
+<span class="cstat-no" title="statement not covered" >                callback(null, service.getCharacteristic(Characteristic.On).value);</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            callback(null, this.updateSwitchState(state));</span>
+        }.bind(this));
+    }
+}
+&nbsp;
+WemoAccessory.prototype.observeDevice = <span class="fstat-no" title="function not covered" >function(device) {</span>
+<span class="cstat-no" title="statement not covered" >    if (device.deviceType === Wemo.DEVICE_TYPE.Maker) {</span>
+<span class="cstat-no" title="statement not covered" >        this.getAttributes();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.client.on('attributeList', <span class="fstat-no" title="function not covered" >function(name, value, prevalue, timestamp) {</span></span>
+<span class="cstat-no" title="statement not covered" >            switch(name) {</span>
+                case 'Switch':
+<span class="cstat-no" title="statement not covered" >                    if (this.accessory.getService(Service.Switch) !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                        this.updateSwitchState(value);</span>
+                    }
+                    else <span class="cstat-no" title="statement not covered" >if (this.accessory.getService(Service.GarageDoorOpener) !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (value == 1) {</span>
+                            // Triggered through HomeKit
+<span class="cstat-no" title="statement not covered" >                            if (this.homekitTriggered === true) {</span>
+<span class="cstat-no" title="statement not covered" >                                delete this.homekitTriggered;</span>
+                            }
+                            // Triggered using the button on the WeMo Maker
+                            else {                                
+<span class="cstat-no" title="statement not covered" >                                var targetDoorState = this.accessory.getService(Service.GarageDoorOpener).getCharacteristic(Characteristic.TargetDoorState);</span>
+<span class="cstat-no" title="statement not covered" >                                var state = targetDoorState.value ? Characteristic.TargetDoorState.OPEN : Characteristic.TargetDoorState.CLOSED;</span>
+<span class="cstat-no" title="statement not covered" >                                this.log("%s - Set Target Door State: %s (triggered by Maker)", this.accessory.displayName, (state ? "Closed" : "Open"));</span>
+<span class="cstat-no" title="statement not covered" >                                targetDoorState.updateValue(state);</span>
+<span class="cstat-no" title="statement not covered" >                                this.setDoorMoving(state);</span>
+                            }
+                        }
+                    }
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+                case 'Sensor':
+<span class="cstat-no" title="statement not covered" >                    this.updateSensorState(value, true);</span>
+<span class="cstat-no" title="statement not covered" >                    break;</span>
+            }
+        }.bind(this));
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >        this.client.on('binaryState', <span class="fstat-no" title="function not covered" >function(state) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if (this.device.deviceType === Wemo.DEVICE_TYPE.Motion || this.device.deviceType === "urn:Belkin:device:NetCamSensor:1") {</span>
+<span class="cstat-no" title="statement not covered" >                this.updateMotionDetected(state);</span>
+            }
+            else {
+<span class="cstat-no" title="statement not covered" >                this.updateSwitchState(state);</span>
+            }
+        }.bind(this));
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (device.deviceType === Wemo.DEVICE_TYPE.Insight) {</span>
+<span class="cstat-no" title="statement not covered" >        this.client.on('insightParams', this.updateInsightParams.bind(this));</span>
+    }
+}
+&nbsp;
+WemoAccessory.prototype.setDoorMoving = <span class="fstat-no" title="function not covered" >function(targetDoorState, homekitTriggered) {</span>
+<span class="cstat-no" title="statement not covered" >    var service = this.accessory.getService(Service.GarageDoorOpener);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.movingTimer) {</span>
+<span class="cstat-no" title="statement not covered" >        clearTimeout(this.movingTimer);</span>
+<span class="cstat-no" title="statement not covered" >        delete this.movingTimer;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.isMoving === true) {</span>
+<span class="cstat-no" title="statement not covered" >        delete this.isMoving;</span>
+<span class="cstat-no" title="statement not covered" >        this.updateCurrentDoorState(Characteristic.CurrentDoorState.STOPPED);</span>
+&nbsp;
+        // Toggle TargetDoorState after receiving a stop
+<span class="cstat-no" title="statement not covered" >        setTimeout(</span>
+<span class="fstat-no" title="function not covered" >            function(obj, state) {</span>
+<span class="cstat-no" title="statement not covered" >                obj.updateValue(state);</span>
+            },
+            500,
+            service.getCharacteristic(Characteristic.TargetDoorState),
+            targetDoorState == Characteristic.TargetDoorState.OPEN ? Characteristic.TargetDoorState.CLOSED : Characteristic.TargetDoorState.OPEN
+        );
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.isMoving = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (homekitTriggered === true) {</span>
+<span class="cstat-no" title="statement not covered" >        var currentDoorState = service.getCharacteristic(Characteristic.CurrentDoorState);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (targetDoorState == Characteristic.TargetDoorState.CLOSED) {</span>
+<span class="cstat-no" title="statement not covered" >            if (currentDoorState.value != Characteristic.CurrentDoorState.CLOSED) {</span>
+<span class="cstat-no" title="statement not covered" >                this.updateCurrentDoorState(Characteristic.CurrentDoorState.CLOSING);</span>
+            }
+        }
+        else <span class="cstat-no" title="statement not covered" >if (targetDoorState == Characteristic.TargetDoorState.OPEN) {</span>
+<span class="cstat-no" title="statement not covered" >            if ((this.sensorPresent !== true &amp;&amp; currentDoorState.value != Characteristic.CurrentDoorState.OPEN) || currentDoorState.value == Characteristic.CurrentDoorState.STOPPED) {</span>
+<span class="cstat-no" title="statement not covered" >                this.updateCurrentDoorState(Characteristic.CurrentDoorState.OPENING);</span>
+            }
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.movingTimer = setTimeout(<span class="fstat-no" title="function not covered" >function(self) {</span></span>
+<span class="cstat-no" title="statement not covered" >        delete self.movingTimer;</span>
+<span class="cstat-no" title="statement not covered" >        delete self.isMoving;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var targetDoorState = self.accessory.getService(Service.GarageDoorOpener).getCharacteristic(Characteristic.TargetDoorState);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (self.sensorPresent !== true) {</span>
+<span class="cstat-no" title="statement not covered" >            self.updateCurrentDoorState(targetDoorState.value ? Characteristic.CurrentDoorState.CLOSED : Characteristic.CurrentDoorState.OPEN);</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        self.getAttributes();</span>
+    }, doorOpenTimer * 1000, this);
+}
+&nbsp;
+WemoAccessory.prototype.setSwitchState = <span class="fstat-no" title="function not covered" >function(state, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var value = state | 0;</span>
+<span class="cstat-no" title="statement not covered" >    var service = this.accessory.getService(Service.Switch) || this.accessory.getService(Service.Outlet);</span>
+<span class="cstat-no" title="statement not covered" >    var switchState = service.getCharacteristic(Characteristic.On);</span>
+<span class="cstat-no" title="statement not covered" >    callback = callback || <span class="fstat-no" title="function not covered" >function() {</span>};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (switchState.value != value) {  //remove redundent calls to setBinaryState when requested state is already achieved</span>
+<span class="cstat-no" title="statement not covered" >        this.client.setBinaryState(value, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >            if(!err) {</span>
+<span class="cstat-no" title="statement not covered" >                this.log("%s - Set state: %s", this.accessory.displayName, (value ? "On" : "Off"));</span>
+<span class="cstat-no" title="statement not covered" >                callback(null);</span>
+            }
+            else {
+<span class="cstat-no" title="statement not covered" >                this.log("%s - Set state FAILED: %s. Error: %s", this.accessory.displayName, (value ? "on" : "off"), err.code);</span>
+<span class="cstat-no" title="statement not covered" >                callback(new Error(err));</span>
+            }
+        }.bind(this));
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >        callback(null);</span>
+    }
+}
+&nbsp;
+WemoAccessory.prototype.setTargetDoorState = <span class="fstat-no" title="function not covered" >function(state, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var value = state | 0;</span>
+<span class="cstat-no" title="statement not covered" >    callback = callback || <span class="fstat-no" title="function not covered" >function() {</span>};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.homekitTriggered = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var currentDoorState = this.accessory.getService(Service.GarageDoorOpener).getCharacteristic(Characteristic.CurrentDoorState);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.isMoving !== true) {</span>
+<span class="cstat-no" title="statement not covered" >        if (value == Characteristic.TargetDoorState.CLOSED &amp;&amp; currentDoorState.value == Characteristic.CurrentDoorState.CLOSED) {</span>
+<span class="cstat-no" title="statement not covered" >            this.log("Door already closed");</span>
+<span class="cstat-no" title="statement not covered" >            callback(null);</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+        else <span class="cstat-no" title="statement not covered" >if (value == Characteristic.TargetDoorState.OPEN &amp;&amp; currentDoorState.value == Characteristic.CurrentDoorState.OPEN) {</span>
+<span class="cstat-no" title="statement not covered" >            this.log("Door already open");</span>
+<span class="cstat-no" title="statement not covered" >            callback(null);</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.client.setBinaryState(1, <span class="fstat-no" title="function not covered" >function (err) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if(!err) {</span>
+<span class="cstat-no" title="statement not covered" >            this.log("%s - Set Target Door State: %s (triggered by HomeKit)",</span>
+                this.accessory.displayName,
+                (value ? "Closed" : "Open")
+            );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.setDoorMoving(value, true);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            callback(null);</span>
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >            this.log("%s - Set state FAILED: %s. Error: %s", this.accessory.displayName, (value ? "on" : "off"), err.code);</span>
+<span class="cstat-no" title="statement not covered" >            callback(new Error(err));</span>
+        }
+    }.bind(this));
+}
+&nbsp;
+WemoAccessory.prototype.setupDevice = <span class="fstat-no" title="function not covered" >function(device) {</span>
+<span class="cstat-no" title="statement not covered" >    this.device = device;</span>
+<span class="cstat-no" title="statement not covered" >    this.client = wemo.client(device);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.client.on('error', <span class="fstat-no" title="function not covered" >function(err) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this.log('%s reported error %s', this.accessory.displayName, err.code);</span>
+    }.bind(this));
+}
+&nbsp;
+WemoAccessory.prototype.updateConsumption = <span class="fstat-no" title="function not covered" >function(raw) {</span>
+<span class="cstat-no" title="statement not covered" >    var value = Math.round(raw / 1000);</span>
+<span class="cstat-no" title="statement not covered" >    var service = this.accessory.getService(Service.Switch) || this.accessory.getService(Service.Outlet);</span>
+<span class="cstat-no" title="statement not covered" >    var consumption = service.getCharacteristic(Consumption);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (consumption.value !== value) {</span>
+<span class="cstat-no" title="statement not covered" >        this.log("%s - Consumption: %sw", this.accessory.displayName, value);</span>
+<span class="cstat-no" title="statement not covered" >        consumption.setValue(value);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return value;</span>
+}
+&nbsp;
+WemoAccessory.prototype.updateInsightParams = <span class="fstat-no" title="function not covered" >function(state, power, data) {</span>
+<span class="cstat-no" title="statement not covered" >    this.updateSwitchState(state);</span>
+<span class="cstat-no" title="statement not covered" >    this.updateOutletInUse(state);</span>
+<span class="cstat-no" title="statement not covered" >    this.updateConsumption(power);</span>
+<span class="cstat-no" title="statement not covered" >    this.updateTotalConsumption(data.TodayConsumed);</span>
+}
+&nbsp;
+WemoAccessory.prototype.updateOutletInUse = <span class="fstat-no" title="function not covered" >function(state) {</span>
+<span class="cstat-no" title="statement not covered" >    state = state | 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var value = !!state;</span>
+<span class="cstat-no" title="statement not covered" >    var service = this.accessory.getService(Service.Switch) || this.accessory.getService(Service.Outlet);</span>
+<span class="cstat-no" title="statement not covered" >    var outletInUse = service.getCharacteristic(Characteristic.OutletInUse);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (outletInUse.value !== value) {</span>
+<span class="cstat-no" title="statement not covered" >        this.log("%s - Outlet In Use: %s", this.accessory.displayName, (value ? "Yes" : "No"));</span>
+<span class="cstat-no" title="statement not covered" >        outletInUse.setValue(value);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return value;</span>
+}
+&nbsp;
+WemoAccessory.prototype.updateMotionDetected = <span class="fstat-no" title="function not covered" >function(state) {</span>
+<span class="cstat-no" title="statement not covered" >    state = state | 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var value = !!state;</span>
+<span class="cstat-no" title="statement not covered" >    var motionDetected = this.accessory.getService(Service.MotionSensor).getCharacteristic(Characteristic.MotionDetected);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if ((value === motionDetected.value &amp;&amp; this.motionTimer === undefined) || (value === false &amp;&amp; this.motionTimer)) {</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (value === true || noMotionTimer == 0) {</span>
+<span class="cstat-no" title="statement not covered" >        if (this.motionTimer) {</span>
+<span class="cstat-no" title="statement not covered" >            this.log("%s - no motion timer stopped", this.accessory.displayName);</span>
+<span class="cstat-no" title="statement not covered" >            clearTimeout(this.motionTimer);</span>
+<span class="cstat-no" title="statement not covered" >            delete this.motionTimer;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.log("%s - Motion Sensor: %s", this.accessory.displayName, (value ? "Detected" : "Clear"));</span>
+<span class="cstat-no" title="statement not covered" >        motionDetected.setValue(value);</span>
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >        this.log("%s - no motion timer started [%d secs]", this.accessory.displayName, noMotionTimer);</span>
+<span class="cstat-no" title="statement not covered" >        clearTimeout(this.motionTimer);</span>
+<span class="cstat-no" title="statement not covered" >        this.motionTimer = setTimeout(<span class="fstat-no" title="function not covered" >function(self) {</span></span>
+<span class="cstat-no" title="statement not covered" >            self.log("%s - Motion Sensor: Clear; no motion timer completed", self.accessory.displayName);</span>
+<span class="cstat-no" title="statement not covered" >            self.accessory.getService(Service.MotionSensor).getCharacteristic(Characteristic.MotionDetected).setValue(false);</span>
+<span class="cstat-no" title="statement not covered" >            delete self.motionTimer;</span>
+        }, noMotionTimer * 1000, this);
+    }
+}
+&nbsp;
+WemoAccessory.prototype.updateReachability = <span class="fstat-no" title="function not covered" >function(reachable) {</span>
+<span class="cstat-no" title="statement not covered" >    this.accessory.updateReachability(reachable);</span>
+}
+&nbsp;
+WemoAccessory.prototype.updateCurrentDoorState = <span class="fstat-no" title="function not covered" >function(value, actualFeedback) {</span>
+<span class="cstat-no" title="statement not covered" >    var state;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    switch(value) {</span>
+        case Characteristic.CurrentDoorState.OPEN:
+<span class="cstat-no" title="statement not covered" >            state = "Open";</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case Characteristic.CurrentDoorState.CLOSED:
+<span class="cstat-no" title="statement not covered" >            state = "Closed";</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case Characteristic.CurrentDoorState.OPENING:
+<span class="cstat-no" title="statement not covered" >            state = "Opening";</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case Characteristic.CurrentDoorState.CLOSING:
+<span class="cstat-no" title="statement not covered" >            state = "Closing";</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case Characteristic.CurrentDoorState.STOPPED:
+<span class="cstat-no" title="statement not covered" >            state = "Stopped";</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.log("%s - Get Current Door State: %s",</span>
+        this.accessory.displayName,
+        state
+    );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.accessory</span>
+        .getService(Service.GarageDoorOpener)
+        .getCharacteristic(Characteristic.CurrentDoorState)
+        .updateValue(value);
+}
+&nbsp;
+WemoAccessory.prototype.updateSensorState = <span class="fstat-no" title="function not covered" >function(state, wasTriggered) {</span>
+<span class="cstat-no" title="statement not covered" >    state = state | 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var value = !state;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.accessory.getService(Service.ContactSensor) !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        var sensorState = this.accessory.getService(Service.ContactSensor).getCharacteristic(Characteristic.ContactSensorState);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (sensorState.value !== value) {</span>
+<span class="cstat-no" title="statement not covered" >            this.log("%s - Sensor: %s", this.accessory.displayName, (value ? "Detected" : "Not detected"));</span>
+<span class="cstat-no" title="statement not covered" >            sensorState.updateValue(value ?  Characteristic.ContactSensorState.CONTACT_DETECTED: Characteristic.ContactSensorState.CONTACT_NOT_DETECTED);</span>
+        }
+    }
+    else <span class="cstat-no" title="statement not covered" >if (this.accessory.getService(Service.GarageDoorOpener) !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        var targetDoorState = this.accessory.getService(Service.GarageDoorOpener).getCharacteristic(Characteristic.TargetDoorState);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (targetDoorState.value == Characteristic.TargetDoorState.OPEN) {</span>
+            // Garage door's target state is OPEN and the garage door's current state is OPEN
+<span class="cstat-no" title="statement not covered" >            if (value == Characteristic.CurrentDoorState.OPEN) {</span>
+<span class="cstat-no" title="statement not covered" >                if (this.isMoving !== true) {</span>
+<span class="cstat-no" title="statement not covered" >                    this.updateCurrentDoorState(Characteristic.CurrentDoorState.OPEN, true);</span>
+                }
+                else {
+<span class="cstat-no" title="statement not covered" >                    this.updateCurrentDoorState(Characteristic.CurrentDoorState.OPENING, true);</span>
+                }
+            }
+            // Garage door's target state is OPEN, but the garage door's current state is CLOSED,
+            // it must have been triggered externally by a remote control
+            else <span class="cstat-no" title="statement not covered" >if (value == Characteristic.CurrentDoorState.CLOSED) {</span>
+<span class="cstat-no" title="statement not covered" >                this.log("%s - Set Target Door State: Closed (triggered by External)", this.accessory.displayName);</span>
+<span class="cstat-no" title="statement not covered" >                delete this.isMoving;</span>
+<span class="cstat-no" title="statement not covered" >                targetDoorState.updateValue(Characteristic.TargetDoorState.CLOSED);</span>
+<span class="cstat-no" title="statement not covered" >                this.updateCurrentDoorState(Characteristic.CurrentDoorState.CLOSED, true);</span>
+            }
+        }
+        else <span class="cstat-no" title="statement not covered" >if (targetDoorState.value == Characteristic.TargetDoorState.CLOSED) {</span>
+            // Garage door's target state is CLOSED and the garage door's current state is CLOSED
+<span class="cstat-no" title="statement not covered" >            if (value == Characteristic.CurrentDoorState.CLOSED) {</span>
+<span class="cstat-no" title="statement not covered" >                delete this.isMoving;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (this.movingTimer) {</span>
+<span class="cstat-no" title="statement not covered" >                    clearTimeout(this.movingTimer);</span>
+<span class="cstat-no" title="statement not covered" >                    delete this.movingTimer;</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                this.updateCurrentDoorState(Characteristic.CurrentDoorState.CLOSED, true);</span>
+            }
+            // Garage door's target state is CLOSED, but the garage door's current state is OPEN,
+            // it must have been triggered externally by a remote control
+            else <span class="cstat-no" title="statement not covered" >if (value == Characteristic.CurrentDoorState.OPEN) {</span>
+<span class="cstat-no" title="statement not covered" >                this.log("%s - Set Target Door State: Open (triggered by External)", this.accessory.displayName);</span>
+<span class="cstat-no" title="statement not covered" >                targetDoorState.updateValue(Characteristic.TargetDoorState.OPEN);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (wasTriggered === true) {</span>
+<span class="cstat-no" title="statement not covered" >                    this.setDoorMoving(Characteristic.TargetDoorState.OPEN);</span>
+                }
+            }
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return value;</span>
+}
+&nbsp;
+WemoAccessory.prototype.updateSwitchState = <span class="fstat-no" title="function not covered" >function(state) {</span>
+<span class="cstat-no" title="statement not covered" >    state = state | 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var value = !!state;</span>
+<span class="cstat-no" title="statement not covered" >    var service = this.accessory.getService(Service.Switch) || this.accessory.getService(Service.Outlet);</span>
+<span class="cstat-no" title="statement not covered" >    var switchState = service.getCharacteristic(Characteristic.On);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (switchState.value !== value) {</span>
+<span class="cstat-no" title="statement not covered" >        this.log("%s - Get state: %s", this.accessory.displayName, (value ? "On" : "Off"));</span>
+<span class="cstat-no" title="statement not covered" >        switchState.updateValue(value);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if(value === false &amp;&amp; this.device.deviceType === Wemo.DEVICE_TYPE.Insight) {</span>
+<span class="cstat-no" title="statement not covered" >            this.updateOutletInUse(0);</span>
+<span class="cstat-no" title="statement not covered" >            this.updateConsumption(0);</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return value;</span>
+}
+&nbsp;
+WemoAccessory.prototype.updateTotalConsumption = <span class="fstat-no" title="function not covered" >function(raw) {</span>
+<span class="cstat-no" title="statement not covered" >    var value = Math.round(raw / 10000 * 6) / 100;</span>
+<span class="cstat-no" title="statement not covered" >    var service = this.accessory.getService(Service.Switch) || this.accessory.getService(Service.Outlet);</span>
+<span class="cstat-no" title="statement not covered" >    var totalConsumption = service.getCharacteristic(TotalConsumption);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (totalConsumption.value !== value) {</span>
+<span class="cstat-no" title="statement not covered" >        this.log("%s - Total Consumption: %skwh", this.accessory.displayName, value);</span>
+<span class="cstat-no" title="statement not covered" >        totalConsumption.updateValue(value);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return value;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function WemoLinkAccessory(log, accessory, link, device) {</span>
+<span class="cstat-no" title="statement not covered" >    var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.accessory = accessory;</span>
+<span class="cstat-no" title="statement not covered" >    this.link = link;</span>
+<span class="cstat-no" title="statement not covered" >    this.device = device;</span>
+<span class="cstat-no" title="statement not covered" >    this.log = log;</span>
+<span class="cstat-no" title="statement not covered" >    this.client = wemo.client(link, log);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.client.on('error', <span class="fstat-no" title="function not covered" >function(err) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this.log('%s reported error %s', this.accessory.displayName, err.code);</span>
+    }.bind(this));
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.updateReachability(false);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.accessory.getService(Service.AccessoryInformation)</span>
+        .setCharacteristic(Characteristic.Manufacturer, "Belkin WeMo")
+        .setCharacteristic(Characteristic.Model, "Dimmable Bulb")
+        .setCharacteristic(Characteristic.SerialNumber, device.deviceId);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.accessory.on('identify', <span class="fstat-no" title="function not covered" >function(paired, callback) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this.log("%s - Identify", this.accessory.displayName);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var switchState = this.accessory.getService(Service.Lightbulb).getCharacteristic(Characteristic.On);</span>
+<span class="cstat-no" title="statement not covered" >        var count = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (switchState.value == true) {</span>
+<span class="cstat-no" title="statement not covered" >            setOff();</span>
+        }
+        else {
+<span class="cstat-no" title="statement not covered" >            setOn();</span>
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function setOn() {</span>
+<span class="cstat-no" title="statement not covered" >            switchState.setValue(true);</span>
+<span class="cstat-no" title="statement not covered" >            count++;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (count == 6) {</span>
+<span class="cstat-no" title="statement not covered" >                callback();</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            setTimeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                setOff();</span>
+            }, 500);
+        }
+&nbsp;
+<span class="fstat-no" title="function not covered" >        function setOff() {</span>
+<span class="cstat-no" title="statement not covered" >            switchState.setValue(false);</span>
+<span class="cstat-no" title="statement not covered" >            count++;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (count == 6) {</span>
+<span class="cstat-no" title="statement not covered" >                callback();</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            setTimeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >                setOn();</span>
+            }, 750);
+        }
+    }.bind(this));
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.addEventHandlers();</span>
+<span class="cstat-no" title="statement not covered" >    this.getSwitchState();</span>
+&nbsp;
+    // register eventhandler
+<span class="cstat-no" title="statement not covered" >    this.client.on('statusChange', <span class="fstat-no" title="function not covered" >function(deviceId, capabilityId, value) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (this.device.deviceId !== deviceId){</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.statusChange(deviceId, capabilityId, value);</span>
+    }.bind(this));
+}
+&nbsp;
+WemoLinkAccessory.OPTIONS = {
+    Brightness: '10008',
+    Switch:     '10006'
+}
+&nbsp;
+WemoLinkAccessory.prototype.addEventHandler = <span class="fstat-no" title="function not covered" >function(characteristic) {</span>
+<span class="cstat-no" title="statement not covered" >    var service = this.accessory.getService(Service.Lightbulb)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (service.testCharacteristic(characteristic) === false) {</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    switch(characteristic) {</span>
+        case Characteristic.On:
+<span class="cstat-no" title="statement not covered" >            service</span>
+                .getCharacteristic(Characteristic.On)
+                .on('set', this.setSwitchState.bind(this));
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case Characteristic.Brightness:
+<span class="cstat-no" title="statement not covered" >            service</span>
+                .getCharacteristic(Characteristic.Brightness)
+                .on('set', this.setBrightness.bind(this));
+<span class="cstat-no" title="statement not covered" >            break;</span>
+    }
+}
+&nbsp;
+WemoLinkAccessory.prototype.addEventHandlers = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >    this.addEventHandler(Characteristic.On);</span>
+<span class="cstat-no" title="statement not covered" >    this.addEventHandler(Characteristic.Brightness);</span>
+}
+&nbsp;
+WemoLinkAccessory.prototype.getSwitchState = <span class="fstat-no" title="function not covered" >function(callback) {</span>
+<span class="cstat-no" title="statement not covered" >    callback = callback || <span class="fstat-no" title="function not covered" >function() {</span>};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.client.getDeviceStatus(this.device.deviceId, <span class="fstat-no" title="function not covered" >function(err, capabilities) {</span></span>
+<span class="cstat-no" title="statement not covered" >        if(err) {</span>
+<span class="cstat-no" title="statement not covered" >            callback(null);</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (capabilities[WemoLinkAccessory.OPTIONS.Switch] === undefined || !capabilities[WemoLinkAccessory.OPTIONS.Switch].length) { // we've get no data in the capabilities array, so it's off</span>
+<span class="cstat-no" title="statement not covered" >            this.log("Offline: %s [%s]", this.accessory.displayName, this.device.deviceId);</span>
+<span class="cstat-no" title="statement not covered" >            this.updateReachability(false);</span>
+<span class="cstat-no" title="statement not covered" >            callback(null);</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.log("Online: %s [%s]", this.accessory.displayName, this.device.deviceId);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var value = this.updateSwitchState(capabilities[WemoLinkAccessory.OPTIONS.Switch]);</span>
+<span class="cstat-no" title="statement not covered" >        this.updateBrightness(capabilities[WemoLinkAccessory.OPTIONS.Brightness]);</span>
+<span class="cstat-no" title="statement not covered" >        this.updateReachability(true);</span>
+<span class="cstat-no" title="statement not covered" >        callback(null, value);</span>
+    }.bind(this));
+}
+&nbsp;
+WemoLinkAccessory.prototype.setBrightness = <span class="fstat-no" title="function not covered" >function(value, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    callback = callback || <span class="fstat-no" title="function not covered" >function() {</span>};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.brightness == value) {</span>
+<span class="cstat-no" title="statement not covered" >        callback(null);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this._brightness = value;</span>
+&nbsp;
+    //defer the actual update to smooth out changes from sliders
+<span class="cstat-no" title="statement not covered" >    setTimeout(<span class="fstat-no" title="function not covered" >function(caller, value) {</span></span>
+        //check that we actually have a change to make and that something
+        //hasn't tried to update the brightness again in the last 0.1 seconds
+<span class="cstat-no" title="statement not covered" >        if (caller.brightness !== value &amp;&amp; caller._brightness == value) {</span>
+<span class="cstat-no" title="statement not covered" >            caller.client.setDeviceStatus(caller.device.deviceId, 10008, value * 255 / 100, <span class="fstat-no" title="function not covered" >function(err, response) {</span></span>
+<span class="cstat-no" title="statement not covered" >                caller.log("%s - Set brightness: %s%", caller.accessory.displayName, value);</span>
+<span class="cstat-no" title="statement not covered" >                caller.brightness = value;</span>
+            }.bind(caller));
+        }
+    }, 100, this, value);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    callback(null);</span>
+}
+&nbsp;
+WemoLinkAccessory.prototype.setSwitchState = <span class="fstat-no" title="function not covered" >function(state, callback) {</span>
+<span class="cstat-no" title="statement not covered" >    var value = state | 0;</span>
+<span class="cstat-no" title="statement not covered" >    var switchState = this.accessory.getService(Service.Lightbulb).getCharacteristic(Characteristic.On);</span>
+<span class="cstat-no" title="statement not covered" >    callback = callback || <span class="fstat-no" title="function not covered" >function() {</span>};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if(switchState.value == value) {</span>
+<span class="cstat-no" title="statement not covered" >        callback(null);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.log("%s - Set state: %s", this.accessory.displayName, (value ? "On" : "Off"));</span>
+<span class="cstat-no" title="statement not covered" >    this.client.setDeviceStatus(this.device.deviceId, WemoLinkAccessory.OPTIONS.Switch, value, <span class="fstat-no" title="function not covered" >function(err, response) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this.device.capabilities[WemoLinkAccessory.OPTIONS.Switch] = value;</span>
+<span class="cstat-no" title="statement not covered" >        callback(null);</span>
+    }.bind(this));
+}
+&nbsp;
+WemoLinkAccessory.prototype.statusChange = <span class="fstat-no" title="function not covered" >function(deviceId, capabilityId, value) {</span>
+<span class="cstat-no" title="statement not covered" >    if (this.accessory.reachable === false) {</span>
+<span class="cstat-no" title="statement not covered" >        this.updateReachability(true);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.device.capabilities[capabilityId] == value) {</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.device.capabilities[capabilityId] = value;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    switch(capabilityId) {</span>
+        case WemoLinkAccessory.OPTIONS.Brightness:
+<span class="cstat-no" title="statement not covered" >            this.updateBrightness(value);</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        case WemoLinkAccessory.OPTIONS.Switch:
+<span class="cstat-no" title="statement not covered" >            this.updateSwitchState(value);</span>
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        default:
+<span class="cstat-no" title="statement not covered" >            this.log("This capability (%s) not implemented", capabilityId);</span>
+    }
+}
+&nbsp;
+WemoLinkAccessory.prototype.updateBrightness = <span class="fstat-no" title="function not covered" >function(capability) {</span>
+<span class="cstat-no" title="statement not covered" >    var value = Math.round(capability.split(':').shift() * 100 / 255 );</span>
+<span class="cstat-no" title="statement not covered" >    var brightness = this.accessory.getService(Service.Lightbulb).getCharacteristic(Characteristic.Brightness);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (brightness.value != value) {</span>
+<span class="cstat-no" title="statement not covered" >        this.log("%s - Get brightness: %s%", this.accessory.displayName, value);</span>
+<span class="cstat-no" title="statement not covered" >        brightness.updateValue(value);</span>
+<span class="cstat-no" title="statement not covered" >        this.brightness = value;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return value;</span>
+}
+&nbsp;
+WemoLinkAccessory.prototype.updateReachability = <span class="fstat-no" title="function not covered" >function(reachable) {</span>
+<span class="cstat-no" title="statement not covered" >    this.accessory.updateReachability(reachable);</span>
+}
+&nbsp;
+WemoLinkAccessory.prototype.updateSwitchState = <span class="fstat-no" title="function not covered" >function(state) {</span>
+<span class="cstat-no" title="statement not covered" >    state = state | 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var value = !!state;</span>
+<span class="cstat-no" title="statement not covered" >    var switchState = this.accessory.getService(Service.Lightbulb).getCharacteristic(Characteristic.On);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (switchState.value != value) {</span>
+<span class="cstat-no" title="statement not covered" >        this.log("%s - Get state: %s", this.accessory.displayName, (value ? "On" : "Off"));</span>
+<span class="cstat-no" title="statement not covered" >        switchState.updateValue(value);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return value;</span>
+}
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Mon Apr 17 2017 09:01:28 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
