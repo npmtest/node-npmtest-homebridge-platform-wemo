@@ -1,4 +1,7 @@
-# test coverage for  [homebridge-platform-wemo (v1.1.7)](https://github.com/rudders/homebridge-platform-wemo#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-homebridge-platform-wemo.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-homebridge-platform-wemo) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-homebridge-platform-wemo.svg)](https://travis-ci.org/npmtest/node-npmtest-homebridge-platform-wemo)
+# npmtest-homebridge-platform-wemo
+
+#### test coverage for  [homebridge-platform-wemo (v1.1.7)](https://github.com/rudders/homebridge-platform-wemo#readme)  [![npm package](https://img.shields.io/npm/v/npmtest-homebridge-platform-wemo.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-homebridge-platform-wemo) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-homebridge-platform-wemo.svg)](https://travis-ci.org/npmtest/node-npmtest-homebridge-platform-wemo)
+
 #### WeMo Platform plugin for homebridge - Blubs, Switches and Insight Switches Supported
 
 [![NPM](https://nodei.co/npm/homebridge-platform-wemo.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/homebridge-platform-wemo)
